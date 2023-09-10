@@ -12,10 +12,14 @@
     "test:watch": "skuba test --watch"
   },
   "dependencies": {
+    "@aws-sdk/client-dynamodb": "3.409.0",
+    "@aws-sdk/lib-dynamodb": "3.409.0",
+    "aws-sdk": "2.1454.0",
     "skuba-dive": "^2.0.0"
   },
   "devDependencies": {
     "@types/node": "^18.11.5",
+    "aws-sdk-client-mock": "3.0.0",
     "skuba": "7.2.0"
   },
   "engines": {
