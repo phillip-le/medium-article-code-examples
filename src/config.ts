@@ -11,11 +11,9 @@ const environmentConfigSchema = z.object({
   environment: environmentSchema,
   userTableName: z.string(),
   userTableRoleIndexName: z.string(),
-  awsSdkV3Config: z.object({
-    dynamoDb: z.object({
-      region: z.string(),
-      endpoint: z.string().optional(),
-    }),
+  dynamoDbOptions: z.object({
+    region: z.string(),
+    endpoint: z.string().optional(),
   }),
 });
 
@@ -28,19 +26,18 @@ export const getConfig = (): EnvironmentConfig => {
     environment,
     userTableName: 'User',
     userTableRoleIndexName: 'RoleIndex',
-    awsSdkV3Config:
-      environment === 'production' || environment === 'development'
-        ? {
-            dynamoDb: {
-              region: 'ap-southeast-2',
-            },
-          }
-        : {
-            dynamoDb: {
-              region: 'ap-southeast-2',
-              endpoint: 'http://localhost:8000',
-            },
+    ...(environment === 'production' || environment === 'development'
+      ? {
+          dynamoDbOptions: {
+            region: 'ap-southeast-2',
           },
+        }
+      : {
+          dynamoDbOptions: {
+            region: 'ap-southeast-2',
+            endpoint: 'http://localhost:8000',
+          },
+        }),
   });
 };
 

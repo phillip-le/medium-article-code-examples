@@ -10,9 +10,9 @@ import {
 
 import { config } from 'src/config';
 
-const dynamoDbClient = new DynamoDBClient(config.awsSdkV3Config.dynamoDb);
+const dynamoDbClient = new DynamoDBClient(config.dynamoDbOptions);
 
-const dynamoDbDocumentClient = DynamoDBDocumentClient.from(dynamoDbClient);
+export const dynamoDbDocumentClient = DynamoDBDocumentClient.from(dynamoDbClient);
 
 export const putDynamoDb = async (
   params: PutCommandInput,
