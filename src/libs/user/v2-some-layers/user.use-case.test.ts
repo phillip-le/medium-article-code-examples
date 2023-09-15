@@ -41,23 +41,19 @@ describe('User use cases', () => {
         role: 'ADMIN',
       };
 
+      const expectedUser: User = {
+        id: mockUserId,
+        email: mockUserInput.email,
+        role: mockUserInput.role,
+        createdAt: mockTime,
+        updatedAt: mockTime,
+      };
+
       const createdUser = await createUser(mockUserInput);
 
-      expect(createdUser).toEqual<User>({
-        id: mockUserId,
-        email: mockUserInput.email,
-        role: mockUserInput.role,
-        createdAt: mockTime,
-        updatedAt: mockTime,
-      });
+      expect(createdUser).toEqual<User>(expectedUser);
 
-      expect(createUserDynamoDb).toHaveBeenCalledWith<[User]>({
-        id: mockUserId,
-        email: mockUserInput.email,
-        role: mockUserInput.role,
-        createdAt: mockTime,
-        updatedAt: mockTime,
-      });
+      expect(createUserDynamoDb).toHaveBeenCalledWith<[User]>(expectedUser);
     });
   });
 

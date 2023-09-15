@@ -16,7 +16,7 @@ import {
 export const createUser = async (input: CreateUserInput): Promise<User> => {
   const createdAt = new Date().toISOString();
 
-  const userToCreate = {
+  const userToCreate: User = {
     id: randomUUID(),
     email: input.email,
     role: input.role,
