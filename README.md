@@ -1,3 +1,3 @@
 # aws-sdk-testing
 
-Minimise the cost of change. 
+Minimise the cost of change.
