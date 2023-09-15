@@ -5,9 +5,9 @@ import type { DynamoDB } from 'aws-sdk';
 import { config } from 'src/config';
 import { dynamoDbDocumentClient } from 'src/libs/aws-sdk-v2/dynamodb';
 
-import type { CreateUserInput, User } from '../user.type';
+import type { CreateUserInput, User } from '../../user.type';
 
-import { createUser, getUsersByRole } from './user.aws-sdk-v2.service';
+import { createUser, getUsersByRole } from './user.service';
 
 jest.mock('crypto');
 

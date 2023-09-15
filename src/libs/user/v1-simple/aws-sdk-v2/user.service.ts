@@ -6,9 +6,10 @@ import { dynamoDbDocumentClient } from 'src/libs/aws-sdk-v2/dynamodb';
 import {
   type CreateUserInput,
   type GetUsersByRoleOutput,
+  type Role,
   type User,
   userSchema,
-} from '../user.type';
+} from '../../user.type';
 
 export const createUser = async (input: CreateUserInput): Promise<User> => {
   const createdAt = new Date().toISOString();
@@ -32,7 +33,7 @@ export const createUser = async (input: CreateUserInput): Promise<User> => {
 };
 
 export const getUsersByRole = async (
-  role: string,
+  role: Role,
 ): Promise<GetUsersByRoleOutput> => {
   const { Items: maybeUsers } = await dynamoDbDocumentClient
     .query({

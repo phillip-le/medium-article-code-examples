@@ -5,13 +5,13 @@ import type {
 } from '@aws-sdk/lib-dynamodb';
 
 import { config } from 'src/config';
+import { putDynamoDb, queryDynamoDb } from 'src/libs/aws-sdk-v3/dynamodb';
 
-import { putDynamoDb, queryDynamoDb } from '../../libs/aws-sdk-v3/dynamodb';
 import type { GetUsersByRoleOutput, Role, User } from '../user.type';
 
 import { createUserDynamoDb, getUsersByRoleDynamoDb } from './user.repository';
 
-jest.mock('../../libs/aws-sdk-v3/dynamodb');
+jest.mock('src/libs/aws-sdk-v3/dynamodb');
 
 describe('UserRepository', () => {
   const mockUser: User = {

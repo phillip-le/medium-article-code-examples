@@ -12,9 +12,9 @@ import type {
   GetUsersByRoleOutput,
   Role,
   User,
-} from '../user.type';
+} from '../../user.type';
 
-import { createUser, getUsersByRole } from './user.aws-sdk-v3.service';
+import { createUser, getUsersByRole } from './user.service';
 
 jest.mock('crypto');
 

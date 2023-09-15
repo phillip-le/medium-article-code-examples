@@ -5,7 +5,7 @@ import type {
   GetUsersByRoleOutput,
   Role,
   User,
-} from '../user.type';
+} from 'src/libs/user/user.type';
 
 import { createUserDynamoDb, getUsersByRoleDynamoDb } from './user.repository';
 import { createUser } from './user.use-case';

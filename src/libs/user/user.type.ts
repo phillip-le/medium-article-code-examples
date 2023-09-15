@@ -22,10 +22,4 @@ export const createUserInputSchema = userSchema.omit({
 
 export type CreateUserInput = z.infer<typeof createUserInputSchema>;
 
-export const getUsersByRoleInputSchema = z.object({
-  role: roleSchema,
-});
-
-export type GetUsersByRoleInput = z.infer<typeof getUsersByRoleInputSchema>;
-
 export type GetUsersByRoleOutput = User[];

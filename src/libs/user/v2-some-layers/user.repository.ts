@@ -1,6 +1,6 @@
 import { config } from 'src/config';
+import { putDynamoDb, queryDynamoDb } from 'src/libs/aws-sdk-v3/dynamodb';
 
-import { putDynamoDb, queryDynamoDb } from '../../libs/aws-sdk-v3/dynamodb';
 import {
   type GetUsersByRoleOutput,
   type Role,
