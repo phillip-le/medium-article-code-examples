@@ -1,6 +1,6 @@
 # Unit testing AWS SDK in TypeScript
 
-Take a look at the source code in [GitHub](https://github.com/phillip-le/aws-sdk-testing).
+Take a look at the source code in [GitHub](https://github.com/phillip-le/medium-article-code-examples).
 
 ## Unit testing AWS SDK v3 using aws-sdk-client-mock
 

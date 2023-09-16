@@ -1,3 +1,5 @@
+# WIP
+
 One of the tradeoffs we make by directly referencing `putDynamoDb` is that our "business logic" of creating a user is coupled
 with where the user data is persisted. Our business logic can be summarised as:
 
