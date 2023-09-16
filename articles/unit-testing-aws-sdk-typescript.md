@@ -1,8 +1,8 @@
-# Unit testing TypeScript AWS SDK
+# Unit testing AWS SDK in TypeScript
 
 Take a look at the source code in [GitHub](https://github.com/phillip-le/aws-sdk-testing).
 
-## Unit testing with AWS SDK v3 using aws-sdk-client-mock
+## Unit testing AWS SDK v3 using aws-sdk-client-mock
 
 I'll use a simple CRUD application which creates a user account and persists it to DynamoDB using AWS SDK v3 as an example.
 DynamoDB has a few libraries like `@aws-sdk/client-dynamodb` and `@aws-sdk/lib-dynamodb`. `@aws-sdk/client-dynamodb` is

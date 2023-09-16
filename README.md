@@ -1,6 +1,6 @@
 ## Source code for the following articles
 
-- [Unit testing AWS SDK v3 TypeScript](./articles/unit-testing-aws-sdk-typescript.md)
+- [Unit testing AWS SDK v3 in TypeScript](./articles/unit-testing-aws-sdk-typescript.md)
 - [Evolving Code Architecture](./articles/evolving-code-architecture.md)
 
 ## Setup locally
