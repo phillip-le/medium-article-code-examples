@@ -52,7 +52,7 @@ export const createUser = async (input: CreateUserInput): Promise<User> => {
 };
 ```
 
-[Source](./src/libs/user/v1-simple/aws-sdk-v3/user.service.ts)
+[Source](src/libs/user/v1-aws-sdk-client-mock/aws-sdk-v3/user.service.ts)
 
 To test this we can use the [aws-sdk-client-mock](https://www.npmjs.com/package/aws-sdk-client-mock) library which provides a simple way to mock AWS SDK v3 clients:
 
@@ -76,7 +76,7 @@ it('should create user with readonly properties and put in dynamodb', async () =
 });
 ```
 
-[Source](./src/libs/user/v1-simple/aws-sdk-v3/user.service.test.ts)
+[Source](src/libs/user/v1-aws-sdk-client-mock/aws-sdk-v3/user.service.test.ts)
 
 For creating a user, we do not use the response from the `PutCommand` so we can just return an empty object.
 
@@ -104,7 +104,7 @@ export const getUsersByRole = async (
 };
 ```
 
-[Source](./src/libs/user/v1-simple/aws-sdk-v3/user.service.ts)
+[Source](src/libs/user/v1-aws-sdk-client-mock/aws-sdk-v3/user.service.ts)
 
 We would need to setup the list users that DynamoDB would return:
 
@@ -126,7 +126,7 @@ it('should query user by role from dynamodb', async () => {
 });
 ```
 
-[Source](./src/libs/user/v1-simple/aws-sdk-v3/user.service.test.ts)
+[Source](src/libs/user/v1-aws-sdk-client-mock/aws-sdk-v3/user.service.test.ts)
 
 We also want to assert that we are giving the DynamoDB client commands with the correct parameters, for example with the `PutCommand` we want to use
 the correct table name and the user we expect to create. We can use the custom jest matchers provided by [aws-sdk-client-mock-jest](https://www.npmjs.com/package/aws-sdk-client-mock#jest-matchers) to do this:
@@ -154,7 +154,7 @@ it('should persist user to dynamodb', async () => {
 });
 ```
 
-[Source](./src/libs/user/v1-simple/aws-sdk-v3/user.service.test.ts)
+[Source](src/libs/user/v1-aws-sdk-client-mock/aws-sdk-v3/user.service.test.ts)
 
 Similarly, we can use the `toHaveReceivedCommandWith` matcher to assert that the client has received a `QueryCommand` with the correct parameters:
 
@@ -170,7 +170,7 @@ it('should query user by role from dynamodb', async () => {
 });
 ```
 
-[Source](./src/libs/user/v1-simple/aws-sdk-v3/user.service.test.ts)
+[Source](src/libs/user/v1-aws-sdk-client-mock/aws-sdk-v3/user.service.test.ts)
 
 ## Comparing testing approach to AWS SDK v2
 
@@ -192,7 +192,7 @@ const { Items: maybeUsers } = await dynamoDbDocumentClient
   .promise();
 ```
 
-[Source](./src/libs/user/v1-simple/aws-sdk-v2/user.service.ts)
+[Source](src/libs/user/v1-aws-sdk-client-mock/aws-sdk-v2/user.service.ts)
 
 Notice that AWS SDK v2 does not support promises initially, so we need to call the `promise` method to get a promise. This
 makes mocking more complex:
@@ -228,7 +228,7 @@ it('should query user by role from dynamodb', async () => {
 });
 ```
 
-[Source](./src/libs/user/v1-simple/aws-sdk-v2/user.service.test.ts)
+[Source](src/libs/user/v1-aws-sdk-client-mock/aws-sdk-v2/user.service.test.ts)
 
 We can see above that while it is possible to unit test AWS SDK v2, it was not intuitive how to do so.
 Ideally, the testability of our application should not be heavily reliant on the implementation details of third party libraries.
@@ -273,12 +273,14 @@ export const getUsersByRoleDynamoDb = async (
 };
 ```
 
+[Source](./src/libs/user/v1-wrapper-functions/aws-sdk-v3/user.service.ts)
+
 The `queryDynamoDb` wrapper function is much easier to mock than the `send` method of the `DynamoDBDocumentClient` class.
 
 In our test file, we first mock the file that exports the AWS SDK wrapper functions:
 
 ```ts
-jest.mock('../../aws-sdk-v3/dynamodb');
+jest.mock('../../../aws-sdk-v3/dynamodb');
 ```
 
 This replaces all the functions exported by the file with mock functions. Then, we can mock the `queryDynamoDb` function using `jest.mocked`:
@@ -299,7 +301,7 @@ it('should query user by role from dynamodb', async () => {
 });
 ```
 
-[Source](./src/libs/user/v2-some-layers/user.repository.test.ts)
+[Source](./src/libs/user/v1-wrapper-functions/aws-sdk-v3/user.service.test.ts)
 
 We can also assert that `queryDynamoDb` was called with the correct parameters easily with `toHaveBeenCalledWith`:
 
@@ -315,6 +317,8 @@ it('should query user by role from dynamodb', async () => {
 });
 ```
 
+[Source](./src/libs/user/v1-wrapper-functions/aws-sdk-v3/user.service.test.ts)
+
 This way our implementation is not reliant on third party libraries like `aws-sdk-client-mock` and we can use standard `jest` mocking.
 
 If we used AWS SDK v2, `queryDynamoDb` would look like this:
@@ -328,4 +332,28 @@ export const queryDynamoDb = async (
 
 [Source](./src/libs/aws-sdk-v2/dynamodb.ts)
 
-But our tests would look the same.
+But our tests would look almost exactly the same aside from typing differences.
+
+```ts
+// AWS SDK v3
+expect(putDynamoDb).toHaveBeenCalledWith<[PutCommandInput]>({
+  TableName: config.userTableName,
+  Item: createdUser,
+});
+// AWS SDK v2
+expect(putDynamoDb).toHaveBeenCalledWith<
+  [DynamoDB.DocumentClient.PutItemInput]
+>({
+  TableName: config.userTableName,
+  Item: createdUser,
+});
+```
+
+Which can both be simplified using the built-in [Parameters](https://www.typescriptlang.org/docs/handbook/utility-types.html#parameterstype) utility type:
+
+```ts
+expect(putDynamoDb).toHaveBeenCalledWith<Parameters<typeof putDynamoDb>>({
+  TableName: config.userTableName,
+  Item: createdUser,
+});
+```
