@@ -1,9 +1,9 @@
-# Source code for the following articles
+## Source code for the following articles
 
 - [Unit testing AWS SDK v3 TypeScript](./articles/unit-testing-aws-sdk-typescript.md)
 - [Evolving Code Architecture](./articles/evolving-code-architecture.md)
 
-# Setup locally
+## Setup locally
 
 - Requires Node v18
 - Yarn v1
@@ -25,15 +25,17 @@ yarn test
 ### Lint
 
 Fix issues
+
 ```shell
 yarn format
 ```
 
-# Check for issues
+Check for issues
+
 ```shell
 yarn lint
 ```
 
-# References
+## References
 
 Generated using [skuba](https://github.com/seek-oss/skuba)
