@@ -87,6 +87,16 @@ describe('User service no layers aws sdk v2', () => {
         .mockImplementation(mockQueryDynamoDb);
 
       await expect(getUsersByRole('READER')).resolves.toEqual([mockReaderUser]);
+
+      expect(mockQueryDynamoDb).toHaveBeenCalledWith<
+        [DynamoDB.DocumentClient.QueryInput]
+      >({
+        TableName: config.userTableName,
+        IndexName: config.userTableRoleIndexName,
+        ExpressionAttributeNames: { '#role': 'role' },
+        ExpressionAttributeValues: { ':role': mockReaderUser.role },
+        KeyConditionExpression: '#role = :role',
+      });
     });
   });
 });

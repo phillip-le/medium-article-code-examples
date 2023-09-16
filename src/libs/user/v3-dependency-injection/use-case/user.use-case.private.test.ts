@@ -8,9 +8,7 @@ import {
 
 describe('User use cases', () => {
   describe('createUser', () => {
-    it('should create user based on input and generate readonly properties', async () => {
-      const mockPersistUser = jest.fn() as PersistUser;
-
+    it('should create and persist user', async () => {
       const createUserInput: CreateUserInput = {
         email: 'TestUserEmail',
         role: 'ADMIN',
@@ -23,9 +21,12 @@ describe('User use cases', () => {
         updatedAt: '2023-09-10T05:58:16.945Z',
       };
 
+      const mockCreateUserEntity = () => mockUser;
+      const mockPersistUser = jest.fn() as PersistUser;
+
       const createUserUseCaseInjected = createUserUseCase({
         persistUser: mockPersistUser,
-        createUserEntity: () => mockUser,
+        createUserEntity: mockCreateUserEntity,
       });
 
       await expect(createUserUseCaseInjected(createUserInput)).resolves.toEqual(
