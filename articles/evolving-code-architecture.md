@@ -22,7 +22,7 @@ export const createUserDynamoDb = async (user: User): Promise<void> => {
 };
 ```
 
-[Source](./src/libs/user/v2-some-layers/user.repository.ts)
+[Source](../src/libs/user/v2-some-layers/user.repository.ts)
 
 Now, our business logic just needs to pass a `User` object.
 
@@ -71,7 +71,7 @@ it('should create user based on input and generate readonly properties', async (
 });
 ```
 
-[Source](./src/libs/user/v2-some-layers/user.use-case.test.ts)
+[Source](../src/libs/user/v2-some-layers/user.use-case.test.ts)
 
 This approach is a little more verbose but it allows us to decouple our business logic from the implementation details of how the user is persisted.
 This approach also tends to happen naturally as we add more and more logic into our use case and we refactor our code into separate functions. For example, we could
@@ -141,7 +141,7 @@ export const createUserUseCase =
   };
 ```
 
-[Source](./src/libs/user/v3-dependency-injection/user.use-case.ts)
+[Source](../src/libs/user/v3-dependency-injection/user.use-case.ts)
 
 Which makes our use case test easy to understand in terms of our original steps:
 
@@ -177,7 +177,7 @@ it('should create and persist user', async () => {
 });
 ```
 
-[Source](./src/libs/user/v3-dependency-injection/use-case/user.use-case.private.test.ts)
+[Source](../src/libs/user/v3-dependency-injection/use-case/user.use-case.private.test.ts)
 
 Dependency injection also makes it easy to inject test implementations which are typically hard to mock. For example, when
 we create our user entity, we generate a timestamp of the current time implicitly using the `Date` class. `jest` provides a way to set the system time for
@@ -208,7 +208,7 @@ it('should create user based on input and generate readonly properties', async (
 });
 ```
 
-[Source](./src/libs/user/v2-some-layers/user.use-case.test.ts)
+[Source](../src/libs/user/v2-some-layers/user.use-case.test.ts)
 
 On the other hand, with dependency injection we can rely on an interface which generates the current `Date` for us.
 
@@ -235,7 +235,7 @@ export const createUserEntity =
   };
 ```
 
-[Source](./src/libs/user/v3-dependency-injection/user.entity.ts)
+[Source](../src/libs/user/v3-dependency-injection/user.entity.ts)
 
 Which makes our tests more straightforward with no additional `jest` knowledge required.
 
@@ -264,7 +264,7 @@ it('should create user based on input and generate readonly properties', () => {
 });
 ```
 
-[Source](./src/libs/user/v3-dependency-injection/entity/user.entity.private.test.ts)
+[Source](../src/libs/user/v3-dependency-injection/entity/user.entity.private.test.ts)
 
 ## Injecting dependencies statically
 
