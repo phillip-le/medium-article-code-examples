@@ -14,7 +14,7 @@
   "dependencies": {
     "@aws-sdk/client-dynamodb": "3.409.0",
     "@aws-sdk/lib-dynamodb": "3.540.0",
-    "aws-sdk": "2.1454.0",
+    "aws-sdk": "2.1628.0",
     "skuba-dive": "^2.0.0",
     "zod": "3.22.4"
   },
