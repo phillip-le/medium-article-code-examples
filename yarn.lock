@@ -3292,10 +3292,10 @@ aws-sdk-client-mock@3.0.0:
     sinon "^14.0.2"
     tslib "^2.1.0"
 
-aws-sdk@2.1454.0:
-  version "2.1454.0"
-  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.1454.0.tgz#4fa177e8bd2cee4b785a29f3da3756d6404f937d"
-  integrity sha512-k+wBy+ev2HWawdfYlZqGMD4WI8zyS+r6t1hc8pwSxm3s8wjP69s8df4LjUaMxMwK8xu7UscVVsXJBpMMsXFhew==
+aws-sdk@2.1691.0:
+  version "2.1691.0"
+  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.1691.0.tgz#9d6ccdcbae03c806fc62667b76eb3e33e5294dcc"
+  integrity sha512-/F2YC+DlsY3UBM2Bdnh5RLHOPNibS/+IcjUuhP8XuctyrN+MlL+fWDAiela32LTDk7hMy4rx8MTgvbJ+0blO5g==
   dependencies:
     buffer "4.9.2"
     events "1.1.1"
@@ -3306,7 +3306,7 @@ aws-sdk@2.1454.0:
     url "0.10.3"
     util "^0.12.4"
     uuid "8.0.0"
-    xml2js "0.5.0"
+    xml2js "0.6.2"
 
 babel-jest@^29.6.4:
   version "29.6.4"
@@ -9196,10 +9196,10 @@ write-file-atomic@^5.0.0, write-file-atomic@^5.0.1:
     imurmurhash "^0.1.4"
     signal-exit "^4.0.1"
 
-xml2js@0.5.0:
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/xml2js/-/xml2js-0.5.0.tgz#d9440631fbb2ed800203fad106f2724f62c493b7"
-  integrity sha512-drPFnkQJik/O+uPKpqSgr22mpuFHqKdbS835iAQrUC73L2F5WkboIRd63ai/2Yg6I1jzifPFKH2NTK+cfglkIA==
+xml2js@0.6.2:
+  version "0.6.2"
+  resolved "https://registry.yarnpkg.com/xml2js/-/xml2js-0.6.2.tgz#dd0b630083aa09c161e25a4d0901e2b2a929b499"
+  integrity sha512-T4rieHaC1EXcES0Kxxj4JWgaUQHDk+qwHcYOCFHfiwKz7tOVPLq7Hjq9dM1WCMhylqMEfP7hMcOIChvotiZegA==
   dependencies:
     sax ">=0.6.0"
     xmlbuilder "~11.0.0"
